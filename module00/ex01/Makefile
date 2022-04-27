@@ -3,7 +3,7 @@
 NAME			=	phonebook
 CXX				=	clang++
 CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
-INC				=	-I ./includes
+INC				=	#-I ./includes
 
 SRCS			=	main.cpp \
 					phonebook.cpp \
