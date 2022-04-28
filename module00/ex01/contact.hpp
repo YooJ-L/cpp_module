@@ -12,11 +12,11 @@ class Contact {
 		std::string _darkestsecret;
 
 	public:
-		std::string	GetFirstName() const { return _firstname; }
-		std::string GetLastName() const { return _lastname; }
-  		std::string GetNickname() const { return _nickname; }
-  		std::string GetPhoneNumber() const { return _phonenumber; }
-  		std::string GetDarkestSecret() const { return _darkestsecret; }
+		std::string	GetFirstName() const;
+		std::string GetLastName() const;
+  		std::string GetNickname() const;
+  		std::string GetPhoneNumber() const;
+  		std::string GetDarkestSecret() const;
 		void	SetFirstName(std::string str);
 		void	SetLastName(std::string str);
 		void	SetNickname(std::string str);

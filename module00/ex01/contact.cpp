@@ -1,11 +1,6 @@
 #include "contact.hpp"
 
-#include <iomanip> //setfill(), setw()
-/*
-setw(n) => 출력 시 길이를 n으로 지정
-setfill(c) => 비어있는 공간을 c로 채움
-	setfill은 한번 적용하면 계속 적용됨.
-*/
+#include <iomanip>
 
 std::string	Truncate(std::string str, size_t size)
 {
@@ -13,6 +8,26 @@ std::string	Truncate(std::string str, size_t size)
 		return (str.substr(0, 9) + ".");
 	else
 		return (str);
+}
+
+std::string	Contact::GetFirstName() const {
+	return _firstname;
+}
+
+std::string	Contact::GetLastName() const {
+	return _lastname;
+}
+
+std::string	Contact::GetNickname() const {
+	return _nickname;
+}
+
+std::string	Contact::GetPhoneNumber() const {
+	return _phonenumber;
+}
+
+std::string	Contact::GetDarkestSecret() const {
+	return _darkestsecret;
 }
 
 void	Contact::SetFirstName(std::string str) {

@@ -19,7 +19,6 @@ int	main(void)
 		}
 		else if (task == "EXIT" || task == "exit")
 		{
-			std::cout << "break\n";
 			break ;
 		}
 		std::cout << "Enter a command (ADD or SEARCH or EXIT): ";
