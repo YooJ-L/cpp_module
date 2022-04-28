@@ -50,7 +50,7 @@ int		PhoneBook::InputSearchingIdx() {
 	if (std::cin.get() != '\n' || std::cin.fail())
 	{
 		std::cout << std::cin.fail() << std::endl;
-		std::cin.clear(); //FAILBIT 꺼주는거
+		std::cin.clear();
 		std::cout << std::cin.fail() << std::endl;
 		std::cin.ignore(std::numeric_limits<int>::max(), '\n');
 		return (-1);
@@ -111,13 +111,9 @@ void	PhoneBook::SearchContact() {
 		cout << "Nothing" << std::endl << std::endl;
 }
 
-// void	PrintCmd() {
-// 	cout << "Enter a command (ADD or SEARCH or EXIT): ";
-// }
-
 std::string InputCmd() {
 	std::string input;
-	std::getline(std::cin >> std::ws, input); //값 들어오기 전에 space들 안받아옴
+	std::getline(std::cin >> std::ws, input);
 	if (std::cin.eof())
 		exit(0);
 	return (input);

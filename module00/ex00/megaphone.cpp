@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Megaphone.cpp                                      :+:      :+:    :+:   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoojlee <yoojlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yoojlee <yoojlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 23:08:25 by yoojlee           #+#    #+#             */
-/*   Updated: 2022/04/12 23:40:03 by yoojlee          ###   ########.fr       */
+/*   Updated: 2022/04/28 19:54:37 by yoojlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cctype>
-
-/*
-대문자로 바꾸기 : static_cast<char>(std::toupper())
-*/
 
 int	main(int argc, char **argv)
 {
@@ -32,7 +28,6 @@ int	main(int argc, char **argv)
 			j = 0;
 			while (argv[i][j])
 			{
-				// if (std::isalpha(argv[i][j]))
 				std::cout << static_cast<char>(std::toupper(argv[i][j]));
 				j++;
 			}
