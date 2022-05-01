@@ -1,31 +1,25 @@
-.PHONY			:	all re clean fclean
-NAME			=	zombie
-CXX				=	clang++
-CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
+NAME	 	=	zombie
+CXX			=	c++
+CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 
-SRCS			=	./main.cpp \
-					./Zombie.cpp \
-					./newZombie.cpp \
-					./randomChump.cpp 
+SRCS	=	main.cpp \
+			newZombie.cpp \
+			randomChump.cpp \
+			Zombie.cpp
 
-OBJS			=	$(SRCS:.cpp=.o)
+OBJS 	=	$(SRCS:.cpp=.o)
 
-DEPS			=	$(OBJS:.o=.d)
+$(NAME)	:	$(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-all				:	$(NAME)
+all		:	$(NAME)
 
-$(NAME)			:	$(OBJS)
-					$(CXX) $(CXXFLAGS) $^ -o $(NAME)
+clean 	:
+	rm -rf $(OBJS)
 
-%.o				:	%.cpp
-					$(CXX) $(CXXFLAGS) -c $< -o $@ -MD
+fclean	:	clean
+	rm -rf $(NAME)
 
-clean			:
-				rm -rf $(OBJS) $(DEPS)
+re		:	fclean all
 
-fclean			:	clean
-				rm -rf $(NAME)
-
-re				: fclean all
-
--include $(DEPS)
+.PHONY	: all clean fclean re

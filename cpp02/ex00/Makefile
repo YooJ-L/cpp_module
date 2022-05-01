@@ -1,29 +1,23 @@
-.PHONY		:	all re clean fclean
+NAME		=	a.out
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Wall -std=c++98
 
-NAME		=	fixedPoint00
-CXX			=	clang++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+SRCS	=	main.cpp \
+			Fixed.cpp
+			
+OBJS 	=	$(SRCS:.cpp=.o)
 
-SRCS		=	./main.cpp \
-				Fixed.cpp
+$(NAME)	:	$(OBJS)
+		$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-OBJS		=	$(SRCS:.cpp=.o)
-DEPS		=	$(OBJS:.o=.d)
+all	:	$(NAME)
 
-all			:	$(NAME)
+clean	:
+		rm -rf $(OBJS)
 
-$(NAME)		:	$(OBJS)
-			$(CXX) $(CXXFLAGS) $^ -o $@
+fclean	:	clean
+		rm -rf $(NAME)
 
-%.o			:	%.cpp
-			$(CXX) $(CXXFLAGS) -c $< -o $@ -MD
+re		:	fclean all
 
-clean		:
-			rm -rf $(OBJS) $(DEPS)
-
-fclean		:	clean
-			rm -rf $(NAME)
-
-re			:	fclean all
-
--include $(DEPS)
+.PHONY	: all clean fclean re

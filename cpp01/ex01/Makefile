@@ -1,33 +1,24 @@
-.PHONY		:	all re fclean clean
-
-NAME		=	zombieHorde
-
-CXX			=	clang++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+NAME	 	=	zombieHorde
+CXX			=	c++
+CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 
 SRCS		=	main.cpp \
 				Zombie.cpp \
 				zombieHorde.cpp
 
-OBJS		=	$(SRCS:.cpp=.o)
+OBJS 	=	$(SRCS:.cpp=.o)
 
-DEPS		=	$(OBJS:.o=.d)
+$(NAME)	:	$(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
 
-all			:	$(NAME)
+all		:	$(NAME)
 
-$(NAME)		:	$(OBJS)
-			$(CXX) $(CXXFLAGS) $^ -o $@
+clean 	:
+	rm -rf $(OBJS)
 
+fclean	:	clean
+	rm -rf $(NAME)
 
-%.o			:	%.cpp
-			$(CXX) $(CXXFLAGS) -c $< -o $@ -MD
+re		:	fclean all
 
-clean		:
-			rm -rf $(OBJS) $(DEPS)
-
-fclean		: clean
-			rm -rf $(NAME)
-
-re			: fclean all
-
--include $(DEPS)
+.PHONY	: all clean fclean re

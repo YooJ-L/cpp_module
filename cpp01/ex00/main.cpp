@@ -1,28 +1,38 @@
 #include "Zombie.hpp"
 
+/*
+newZombie함수는 zombie클래스의 인스턴스를 생성하고 현재 인스턴스가 선언된 공간 외부에서도 사용 가능하게 반환하라는 것
+=> 스택에 할당하면 자동으로 소멸되니까 힙에 메모리 할당
+
+스택의 경우 선언했던 함수를 벗어나면 자동으로 소멸.
+
+randomChump는 좀비 클래스 인스턴스 생성, announce 함수 호출 끝. => 함수를 벗어나면 자동으로 소멸.
+*/
 int	main(void)
 {
 	std::cout << "===Heap===" << std::endl;
-	Zombie *zombie1;
-	Zombie *zombie2;
+	Zombie *zombieHeap1;
+	Zombie *zombieHeap2;
 
-	zombie1 = newZombie("zombie1");
-	zombie2 = newZombie("zombie2");
-	zombie1->announce();
-	zombie2->announce();
+	zombieHeap1 = newZombie("zombieHeap1");
+	zombieHeap2 = newZombie("zombieHeap2");
+	zombieHeap1->announce();
+	zombieHeap2->announce();
 
 	std::cout << "\n===Stack===" << std::endl;
-	Zombie zom1("zom1");
-	Zombie zom2("zom2");
+	Zombie zombieStack1("zombieStack1");
+	Zombie zombieStack2("zombieStack2");
 
-	zom1.announce();
-	zom2.announce();
+	zombieStack1.announce();
+	zombieStack2.announce();
 
 	std::cout << "\n===RandomChump===" << std::endl;
 	randomChump("RandomZombie1");
 	randomChump("RandomZombie2");
+	
+	std::cout << std::endl << std::endl;
 
-	delete zombie1;
-	delete zombie2;
+	delete zombieHeap1;
+	delete zombieHeap2;
 	return (0);
 }
