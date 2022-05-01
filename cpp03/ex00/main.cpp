@@ -8,15 +8,15 @@ int		main(void)
 
 	std::cout << std::endl;
 	ClapA.attack("ClapB");
-	ClapB.takeDamage(ClapA.getAttackDamage());
+	ClapB.takeDamage(ClapA.getAttackDamagePoint());
 
 	std::cout << std::endl;
 	ClapB.attack("ClapA");
-	ClapA.takeDamage(ClapB.getAttackDamage());
+	ClapA.takeDamage(ClapB.getAttackDamagePoint());
 
 	std::cout << std::endl;
 	ClapC.attack("ClapB");
-	ClapB.takeDamage(ClapC.getAttackDamage());
+	ClapB.takeDamage(ClapC.getAttackDamagePoint());
 
 	std::cout << std::endl;
 	ClapA.beRepaired(25);

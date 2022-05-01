@@ -2,8 +2,8 @@
 
 ClapTrap::ClapTrap()
 : _name("anonymous"),
-  _hitPoints(10),
-  _energyPoints(10),
+  _hitPoint(10),
+  _energyPoint(10),
   _attackDamage(0)
 {
 	std::cout << "ClapTrap Default constructor called" << std::endl;
@@ -11,8 +11,8 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string name)
 : _name(name),
- _hitPoints(10),
- _energyPoints(10),
+ _hitPoint(10),
+ _energyPoint(10),
  _attackDamage(0)
 {
 	std::cout << "ClapTrap Conversion constructor called" << std::endl;
@@ -20,8 +20,8 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 : _name(other._name),
- _hitPoints(other._hitPoints),
- _energyPoints(other._energyPoints),
+ _hitPoint(other._hitPoint),
+ _energyPoint(other._energyPoint),
  _attackDamage(other._attackDamage)
 {
 	std::cout << "ClapTrap Copy constructor called" << std::endl;
@@ -30,8 +30,8 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 ClapTrap& ClapTrap::operator =(const ClapTrap &other)
 {
 	_name = other._name;
-	_hitPoints = other._hitPoints;
-	_energyPoints = other._energyPoints;
+	_hitPoint = other._hitPoint;
+	_energyPoint = other._energyPoint;
 	_attackDamage = other._attackDamage;
 	return (*this);
 }
@@ -43,54 +43,57 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::attack(const std::string& target)
 {
-	std::cout << "ClapTrap " << this->_name << "가 " << target << " 공격. Caused " << _attackDamage << " points of damage!" << std::endl;
+	std::cout << std::endl;
+	if (_hitPoint == 0 || _energyPoint == 0)
+	{
+		std::cout << "[ ATTACK ] ClapTrap " << this->_name << ": FAIL: NO ENERGY POINT or NO HIT POINT" << std::endl;
+		return ;
+	}
+	_energyPoint--;
+	// ClapTrap <name> attacks <target>, causing <damage> points of damage!
+	std::cout << "[ ATTACK ] " << "ClapTrap " << this->_name << " attacks " << target << ", causing [ " << _attackDamage << " ] points of damage!" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (amount >= _energyPoints)
+	std::cout << std::endl;
+	std::cout << "[ TAKE DAMAGE ] ";
+	if (_hitPoint == 0)
 	{
-		_energyPoints = 0;
-		std::cout << "ClapTrap " << this->_name << " 사망." << std::endl;
+		std::cout << "ClapTrap " << this->_name << " is already dead.." << std::endl;
+		return ;
+	}
+	std::cout << "ClapTrap " << this->_name << " has taken [ " << amount << " ] amount of damage..!+!!+!" << std::endl;
+	if (static_cast<int>(_hitPoint - amount) <= 0) //static_cast 안해주면 음수가 안나옴.
+	{
+		_hitPoint = 0;
+		std::cout << "		=> [ 0 ] hit points left. He's dead.." << std::endl;
 	}
 	else
 	{
-		_energyPoints -= amount;
-		std::cout << "ClapTrap " << this->_name << " 데미지 입었음." <<  "[ Energy Points : " << _energyPoints << " ]" << std::endl;
+		_hitPoint -= amount;
+		std::cout << "		=> [ " << _hitPoint << " ] hit points left." << std::endl;
 	}
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (!_energyPoints)
+	std::cout << std::endl;
+	std::cout << "[ REPAIRED ]";
+	if (_hitPoint != 0 && _energyPoint != 0)
 	{
-		_energyPoints = amount;
-		std::cout << "ClapTrap " << this->_name << " 부활!" << "[ Energy Points : " << _energyPoints << " ]" << std::endl;
+		_hitPoint += amount;
+		_energyPoint--;
+		std::cout << "ClapTrap " << _name << " got back [ " 
+			<< amount << " ] hit points and lose 1 energy point.\n		=> [ " << _energyPoint << " ] energy points left." << std::endl;
 	}
 	else
 	{
-		_energyPoints += amount;
-		std::cout << "ClapTrap " << this->_name << " 에너지 보충.." << "[ Energy Points : " << _energyPoints << " ]" << std::endl;
+		std::cout << "ClapTrap " << _name << ": FAIL: NO ENERGY POINT or NO HIT POINT" << std::endl;
 	}
 }
 
-const std::string&	ClapTrap::getName(void) const
-{
-	return (_name);
-}
-
-unsigned int		ClapTrap::getHitPoints(void) const
-{
-	return (_hitPoints);
-}
-
-unsigned int		ClapTrap::getEnergyPoints(void) const
-{
-	return (_energyPoints);
-}
-
-unsigned int		ClapTrap::getAttackDamage(void) const
+unsigned int		ClapTrap::getAttackDamagePoint(void) const
 {
 	return (_attackDamage);
 }
-
