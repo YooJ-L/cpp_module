@@ -8,7 +8,8 @@ class Fixed
 {
 	private:
 		int	_numValue;
-		static const int _fractionalBit = 8;
+		static const int _fractionalBit = 8; //객체에 의존적이지 않다. 클래스를 대표한다.
+	
 	public:
 		Fixed();
 		Fixed(const Fixed &fixed);
@@ -16,29 +17,32 @@ class Fixed
 		Fixed(const float floatNum);
 		~Fixed();
 
-		Fixed	&operator =(Fixed const &obj);
-		bool	operator >(const Fixed &obj);
-		bool	operator <(const Fixed &obj);
-		bool	operator >=(const Fixed &obj);
-		bool	operator <=(const Fixed &obj);
-		bool	operator ==(const Fixed &obj);
-		bool	operator !=(const Fixed &obj);
+		Fixed	&operator =(const Fixed &obj);
+		bool	operator >(const Fixed &obj) const;
+		bool	operator <(const Fixed &obj) const;
+		bool	operator >=(const Fixed &obj) const;
+		bool	operator <=(const Fixed &obj) const;
+		bool	operator ==(const Fixed &obj) const;
+		bool	operator !=(const Fixed &obj) const;
 
-		const Fixed	operator +(const Fixed &obj);
-		const Fixed	operator -(const Fixed &obj);
-		const Fixed	operator *(const Fixed &obj);
-		const Fixed	operator /(const Fixed &obj);
+		const Fixed	operator +(const Fixed &obj) const;
+		const Fixed	operator -(const Fixed &obj) const;
+		const Fixed	operator *(const Fixed &obj) const;
+		const Fixed	operator /(const Fixed &obj) const;
 
+		//전위연산자
 		Fixed	&operator ++();
 		Fixed	&operator --();
 
+		//후위연산자
 		const Fixed operator ++(int);
 		const Fixed operator --(int);
 
 		static Fixed &min(Fixed &a1, Fixed &a2);
 		static Fixed &max(Fixed &a1, Fixed &a2);
 
-		static const Fixed	&max(const Fixed &a1, const Fixed &a2);
+		static const Fixed &min(const Fixed& a1, const Fixed& a2);
+		static const Fixed &max(const Fixed& a1, const Fixed& a2);
 
 		int		getRawBits() const;
 		void	setRawBits(int const raw);

@@ -36,49 +36,114 @@ Fixed &Fixed::operator=(const Fixed &obj)
 	return (*this);
 }
 
-std::ostream &operator<<(std::ostream &output, const Fixed &fixed)
-{
-	output << fixed.toFloat();
-	return (output);
-}
+//비교연산자
 
-bool	Fixed::operator >(const Fixed &obj)
+bool	Fixed::operator >(const Fixed &obj) const
 {
 	return (this->_numValue > obj._numValue);
 }
 
-bool	Fixed::operator <(const Fixed &obj)
+bool	Fixed::operator <(const Fixed &obj) const
 {
 	return (this->_numValue < obj._numValue);
 }
 
-bool	Fixed::operator >=(const Fixed &obj)
+bool	Fixed::operator >=(const Fixed &obj) const
 {
 	return (this->_numValue >= obj._numValue);
 }
 
-bool	Fixed::operator <=(const Fixed &obj)
+bool	Fixed::operator <=(const Fixed &obj) const
 {
 	return (this->_numValue <= obj._numValue);
 }
 
-bool	Fixed::operator ==(const Fixed &obj)
+bool	Fixed::operator ==(const Fixed &obj) const
 {
 	return (this->_numValue == obj._numValue);
 }
 
-bool	Fixed::operator !=(const Fixed &obj)
+bool	Fixed::operator !=(const Fixed &obj) const
 {
 	return (this->_numValue != obj._numValue);
 }
 
-Fixed	&Fixed::operator +(const Fixed &obj)
+//사칙연산자
+const Fixed	Fixed::operator +(const Fixed &obj) const
 {
-	Fixed	
-	return (this->_numValue + obj._numValue);
+	Fixed result(*this);
+
+	result._numValue += obj._numValue;
+	return result;
 }
 
-int		Fixed::operator -(const Fixed)
+const Fixed	Fixed::operator -(const Fixed &obj) const
+{
+	Fixed result(*this);
+
+	result._numValue -= obj._numValue;
+	return result;
+}
+const Fixed	Fixed::operator *(const Fixed &obj) const
+{
+	Fixed result(*this);
+
+	result._numValue = (result._numValue * obj._numValue) / 256;
+	return result;
+}
+
+const Fixed	Fixed::operator /(const Fixed &obj) const
+{
+	Fixed result(*this);
+	
+	result._numValue = (result._numValue * 256) / obj._numValue;
+	return result;
+}
+
+//증감연산자
+
+Fixed &Fixed::operator ++()
+{
+	++_numValue;
+	return (*this);
+}
+
+Fixed &Fixed::operator --()
+{
+	--_numValue;
+	return (*this);
+}
+
+const Fixed Fixed::operator ++(int)
+{
+	Fixed temp = *this;
+	_numValue++;
+	return (temp);
+}
+
+const Fixed Fixed::operator --(int)
+{
+	Fixed temp = *this;
+	_numValue--;
+	return (temp);
+}
+
+Fixed &Fixed::min(Fixed& a1, Fixed& a2)
+{
+	return (a1 < a2 ? a1 : a2);
+}
+const Fixed &Fixed::min(const Fixed& a1, const Fixed& a2)
+{
+	return (a1 < a2 ? a1 : a2);
+}
+Fixed &Fixed::max(Fixed& a1, Fixed& a2)
+{
+	return (a1 > a2 ? a1 : a2);
+}
+const Fixed &Fixed::max(const Fixed& a1, const Fixed& a2)
+{
+	return (a1 > a2 ? a1 : a2);
+}
 
 int	Fixed::getRawBits() const
 {
@@ -99,4 +164,10 @@ float	Fixed::toFloat() const //fixed-point value => floating-point value
 int		Fixed::toInt() const //fixed-point value => integer value
 {
 	return (_numValue / 256);
+}
+
+std::ostream &operator<<(std::ostream &output, const Fixed &fixed)
+{
+	output << fixed.toFloat();
+	return (output);
 }
