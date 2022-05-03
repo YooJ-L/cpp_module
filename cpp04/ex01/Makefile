@@ -11,7 +11,6 @@ SRCS	=	main.cpp \
 			Dog.cpp \
 			Cat.cpp \
 			WrongAnimal.cpp \
-			WrongDog.cpp \
 			WrongCat.cpp \
 			Brain.cpp)
 			
