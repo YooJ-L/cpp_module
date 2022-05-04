@@ -3,12 +3,15 @@
 Brain::Brain()
 {
 	std::cout << "Brain Default constructor called" << std::endl;
+	for (int i = 0; i < 100; i++)
+		_ideas[i] = "\0";
 }
 
-Brain::Brain(std::string idea)
+Brain::Brain(const std::string idea)
 {
-	setIdeas(idea);
 	std::cout << "Brain Conversion constructor called" << std::endl;
+	for (int i = 0; i < 100; i++)
+		setIdea(idea, i);
 }
 
 Brain::Brain(const Brain &other)
@@ -31,12 +34,9 @@ Brain::~Brain()
 	std::cout << "Brain Destructor called" << std::endl;
 }
 
-void	Brain::setIdeas(const std::string &idea)
+void	Brain::setIdea(const std::string &idea, const size_t idx)
 {
-	for (size_t i = 0; i < 100; i++)
-	{
-		_ideas[i] = idea;
-	}
+	_ideas[idx] = idea;
 }
 
 const std::string& Brain::getIdea(const size_t idx) const

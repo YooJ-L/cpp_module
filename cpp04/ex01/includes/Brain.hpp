@@ -10,13 +10,12 @@ class Brain
 
 	public:
 		Brain();
-		Brain(std::string idea);
+		Brain(const std::string idea);
 		Brain(const Brain &other);
 		Brain& operator =(const Brain &other);
 		~Brain();
 
-		// void	openIdeas();
-		void				setIdeas(const std::string &idea);
+		void				setIdea(const std::string &idea, const size_t idx);
 		const std::string&	getIdea(const size_t idx) const;
 };
 
