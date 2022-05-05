@@ -90,7 +90,9 @@ int main()
 	//깊은 복사
 	std::cout << "\n\n=====Deep Copy======" << std::endl;
 	Dog original2;
-	Dog copy2(original);
+	Dog copy2;
+	
+	copy2 = original2;
 
 	std::cout << "------ original's ideas-----" << std::endl;
 	original2.selectIdea(0);
