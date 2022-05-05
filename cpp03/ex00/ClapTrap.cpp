@@ -44,27 +44,26 @@ ClapTrap::~ClapTrap()
 void	ClapTrap::attack(const std::string& target)
 {
 	std::cout << std::endl;
+	std::cout << "[ ATTACK ] " << this->_name << "=> EnergyPoint: " << this->_energyPoint << ", HitPoint: " << this->_hitPoint << std::endl;
 	if (_hitPoint == 0 || _energyPoint == 0)
 	{
-		std::cout << "[ ATTACK ] ClapTrap " << this->_name << ": FAIL: NO ENERGY POINT or NO HIT POINT" << std::endl;
+		std::cout << "ClapTrap " << this->_name << ": FAIL: NO ENERGY POINT or NO HIT POINT" << std::endl;
 		return ;
 	}
 	_energyPoint--;
-	// ClapTrap <name> attacks <target>, causing <damage> points of damage!
-	std::cout << "[ ATTACK ] " << "ClapTrap " << this->_name << " attacks " << target << ", causing [ " << _attackDamage << " ] points of damage!" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing [ " << _attackDamage << " ] points of damage!" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << std::endl;
-	std::cout << "[ TAKE DAMAGE ] ";
+	std::cout << "[ TAKE DAMAGE ] " << this->_name << "=> EnergyPoint: " << this->_energyPoint << ", HitPoint: " << this->_hitPoint << std::endl;
 	if (_hitPoint == 0)
 	{
 		std::cout << "ClapTrap " << this->_name << " is already dead.." << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << this->_name << " has taken [ " << amount << " ] amount of damage..!+!!+!" << std::endl;
-	if (static_cast<int>(_hitPoint - amount) <= 0) //static_cast 안해주면 음수가 안나옴.
+	if (_hitPoint <= amount)
 	{
 		_hitPoint = 0;
 		std::cout << "		=> [ 0 ] hit points left. He's dead.." << std::endl;
@@ -79,7 +78,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 void	ClapTrap::beRepaired(unsigned int amount)
 {
 	std::cout << std::endl;
-	std::cout << "[ REPAIRED ]";
+	std::cout << "[ REPAIRED ] " << this->_name << "=> EnergyPoint: " << this->_energyPoint << ", HitPoint: " << this->_hitPoint << std::endl;;
 	if (_hitPoint != 0 && _energyPoint != 0)
 	{
 		_hitPoint += amount;

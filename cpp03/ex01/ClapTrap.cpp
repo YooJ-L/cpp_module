@@ -50,7 +50,6 @@ void	ClapTrap::attack(const std::string& target)
 		return ;
 	}
 	_energyPoint--;
-	// ClapTrap <name> attacks <target>, causing <damage> points of damage!
 	std::cout << "[ ATTACK ] " << "ClapTrap " << this->_name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
@@ -64,7 +63,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		return ;
 	}
 	std::cout << "ClapTrap " << this->_name << " has taken [ " << amount << " ] amount of damage..!+!!+!" << std::endl;
-	if (static_cast<int>(_hitPoint - amount) <= 0) //static_cast 안해주면 음수가 안나옴.
+	if (_hitPoint <= amount)
 	{
 		_hitPoint = 0;
 		std::cout << "		=> [ 0 ] hit points left. He's dead.." << std::endl;

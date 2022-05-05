@@ -20,6 +20,8 @@ clean	:
 fclean	:	clean
 		rm -rf $(NAME)
 
-re		:	fclean all
+re:
+	make fclean \
+    make all
 
 .PHONY	: all clean fclean re

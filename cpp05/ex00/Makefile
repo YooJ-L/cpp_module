@@ -1,4 +1,4 @@
-NAME		=	animalbrain
+NAME		=	Bureaucrat
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Wall -std=c++98 $(INFLAGS)
 INFLAGS		=	-I$(INCDIR)
@@ -7,12 +7,7 @@ SRCDIR		=	./srcs/
 
 SRCS	=	main.cpp \
 			$(addprefix $(SRCDIR), \
-			Animal.cpp \
-			Dog.cpp \
-			Cat.cpp \
-			WrongAnimal.cpp \
-			WrongCat.cpp \
-			Brain.cpp)
+			Bureaucrat.cpp)
 			
 OBJS 	=	$(SRCS:.cpp=.o)
 

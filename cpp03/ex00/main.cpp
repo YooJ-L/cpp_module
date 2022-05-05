@@ -12,14 +12,13 @@ int		main(void)
 
 	std::cout << std::endl;
 	ClapB.attack("ClapA");
-	ClapA.takeDamage(ClapB.getAttackDamagePoint());
+	ClapB.beRepaired(25);
 
 	std::cout << std::endl;
 	ClapC.attack("ClapB");
 	ClapB.takeDamage(ClapC.getAttackDamagePoint());
 
 	std::cout << std::endl;
-	ClapA.beRepaired(25);
 
 	std::cout << std::endl;
 	return (0);
