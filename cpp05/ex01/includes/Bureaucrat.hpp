@@ -2,6 +2,10 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include <exception>
+# include "Form.hpp"
+
+class	Form;
 
 class	Bureaucrat
 {
@@ -40,7 +44,9 @@ class	Bureaucrat
 		int					getGrade() const;
 
 		void	increaseGrade();
-		void	decreaseGrade();
+		void	decreaseGrade(); 
+
+		void	signForm(Form &form) const;
 };
 
 std::ostream& operator <<(std::ostream &out, const Bureaucrat &obj);
