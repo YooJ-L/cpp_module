@@ -4,7 +4,7 @@
 #include "WrongCat.hpp"
 #include "WrongAnimal.hpp"
 
-int		main()
+int		main(void)
 {
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
