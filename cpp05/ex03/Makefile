@@ -1,4 +1,4 @@
-NAME		=	Form
+NAME		=	Intern
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Wall -std=c++98 $(INFLAGS)
 INFLAGS		=	-I$(INCDIR)
@@ -8,7 +8,11 @@ SRCDIR		=	./srcs/
 SRCS	=	main.cpp \
 			$(addprefix $(SRCDIR), \
 			Bureaucrat.cpp \
-			Form.cpp)
+			Form.cpp \
+			PresidentialPardonForm.cpp \
+			RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp \
+			Intern.cpp)
 			
 OBJS 	=	$(SRCS:.cpp=.o)
 
