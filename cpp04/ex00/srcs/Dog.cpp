@@ -6,7 +6,8 @@ Dog::Dog()
 	std::cout << "Dog Default constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &other) : Animal(other) //이거 해줘야됨?
+Dog::Dog(const Dog &other)
+: Animal(other)
 {
 	std::cout << "Dog Copy constructor called" << std::endl;
 	*this = other;
@@ -14,6 +15,7 @@ Dog::Dog(const Dog &other) : Animal(other) //이거 해줘야됨?
 
 Dog& Dog::operator =(const Dog &other)
 {
+	std::cout << "Dog copy assignment operator called" << std::endl;
 	_type = other.getType();
 	return (*this);
 }

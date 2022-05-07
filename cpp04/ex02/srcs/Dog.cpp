@@ -8,6 +8,7 @@ Dog::Dog()
 }
 
 Dog::Dog(const Dog &other)
+:Animal(other)
 {
 	std::cout << "Dog Copy constructor called" << std::endl;
 	_brainPTR = new Brain();
@@ -16,6 +17,7 @@ Dog::Dog(const Dog &other)
 
 Dog& Dog::operator =(const Dog &other)
 {
+	std::cout << "Dog copy assignment operator called" << std::endl;
 	_type = other.getType();
 	*(_brainPTR) = *(other._brainPTR);
 	return (*this);

@@ -10,7 +10,7 @@ int main()
 	//subject
 	{
 		std::cout << "=====subject=====" << std::endl;
-		const Animal* meta = new Animal();
+		// const Animal* meta = new Animal();
 		
 		std::cout << std::endl;
 		const Animal* j = new Dog();
@@ -25,10 +25,10 @@ int main()
 		std::cout << std::endl;
 		i->makeSound();
 		j->makeSound();
-		meta->makeSound();
+		// meta->makeSound();
 
 		std::cout << std::endl;
-		delete meta;
+		// delete meta;
 		delete j;//should not create a leak
 		delete i;
 		system("leaks animalbrain");

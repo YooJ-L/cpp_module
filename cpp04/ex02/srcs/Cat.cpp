@@ -8,6 +8,7 @@ Cat::Cat()
 }
 
 Cat::Cat(const Cat &other)
+: Animal(other)
 {
 	std::cout << "Cat Copy constructor called" << std::endl;
 	_brainPTR = new Brain();
@@ -16,6 +17,7 @@ Cat::Cat(const Cat &other)
 
 Cat& Cat::operator =(const Cat &other)
 {
+	std::cout << "Cat copy assignment operator called" << std::endl;
 	_type = other.getType();
 	*(_brainPTR) = *(other._brainPTR);
 	return (*this);

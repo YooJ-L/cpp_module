@@ -29,8 +29,11 @@ int main()
 
 		std::cout << std::endl;
 		delete meta;
+		std::cout << std::endl;
 		delete j;//should not create a leak
+		std::cout << std::endl;
 		delete i;
+		std::cout << std::endl;
 		system("leaks animalbrain");
 	}
 
