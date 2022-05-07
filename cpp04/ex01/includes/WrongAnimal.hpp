@@ -2,7 +2,7 @@
 # define WRONGANIMAL_HPP
 
 # include <iostream>
-//<string> 인클루드 하는 이유?
+
 class WrongAnimal
 {
 	protected:
