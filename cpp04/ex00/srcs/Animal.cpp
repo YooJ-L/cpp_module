@@ -1,6 +1,7 @@
 #include "../includes/Animal.hpp"
 
 Animal::Animal()
+: _type("Anonymous")
 {
 	std::cout << "Animal Default constructor called" << std::endl;
 }
