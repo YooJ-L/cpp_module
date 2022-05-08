@@ -13,13 +13,13 @@ int		main(void)
 	Animal meta3;
 	std::cout << std::endl;
 	Animal meta4(meta3);
-	std::cout << std::endl;
+	std::cout << "---" << std::endl;
 	const Animal* j = new Dog();
 	std::cout << std::endl;
 	Dog dog1;
 	std::cout << std::endl;
 	Dog dog2(dog1);
-	std::cout << std::endl;
+	std::cout << "---" << std::endl;
 	const Animal* i = new Cat();
 	std::cout << std::endl;
 	Cat cat1;
@@ -55,10 +55,10 @@ int		main(void)
 	k->makeSound();
 
 	delete meta;
+	delete meta2;
 	delete j;
 	delete i;
 	delete k;
-	system("leaks polymorphism");
 
 	return 0;
 }

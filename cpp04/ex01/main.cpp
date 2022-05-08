@@ -34,7 +34,6 @@ int main()
 		std::cout << std::endl;
 		delete i;
 		std::cout << std::endl;
-		system("leaks animalbrain");
 	}
 
 	{
@@ -69,7 +68,6 @@ int main()
 			delete zoo[i];
 			delete weird[i];
 		}
-		system("leaks animalbrain");
 	}
 
 	//얕은 복사 테스트
@@ -108,6 +106,5 @@ int main()
 	original2.selectIdea(0);
 	std::cout << "------ copy's ideas-----" << std::endl;
 	copy2.selectIdea(0);
-	system("leaks animalbrain");
 	return 0;
 }
