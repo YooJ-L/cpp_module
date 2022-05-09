@@ -1,10 +1,7 @@
 #include "../includes/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat()
-: _name("Anonymous"), _grade(150)
-{
-  std::cout << "Bureaucrat Default Constructor Called" << std::endl;
-}
+: _name("Anonymous"), _grade(150) {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade)
 : _name(name)
@@ -18,18 +15,13 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade)
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
 : _name(other.getName()), _grade(other.getGrade())
 {
-	std::cout << "Bureaucrat Copy Constructor Called" << std::endl;
 	*this = other;
 }
 
-Bureaucrat::~Bureaucrat()
-{
-	std::cout << "Bureaucrat Destructor Called" << std::endl;
-}
+Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat& Bureaucrat::operator =(const Bureaucrat &other)
 {
-	// this->_name = other.getName(); //const 라서 재할당? 안되지 않나?
 	this->_grade = other.getGrade();
 	return (*this);
 }

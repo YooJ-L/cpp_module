@@ -24,7 +24,7 @@ Form::Form(const Form &other)
 : _name(other.getFormName()), _signGrade(other.getSignGrade()), _executeGrade(other.getExecuteGrade())
 {
 	_isSigned = other._isSigned;
-	*this = other; //써주는 사람도 있고 안써주는 사람도 있던데 무슨 차이?
+	*this = other;
 }
 
 Form::~Form()
@@ -74,7 +74,7 @@ void	Form::beSigned(const Bureaucrat &bureaucrat)
 
 void	Form::execute(Bureaucrat const &executor) const
 {
-	if (_isSigned == false)
+	if (!this->getIsSigned())
 	{
 		throw NotSignedException();
 	}

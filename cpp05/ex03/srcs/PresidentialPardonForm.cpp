@@ -13,7 +13,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator =(const PresidentialPardonForm &other)
 {
-	static_cast<void>(other); //여기서 안써줘서 void로
+	static_cast<void>(other);
 	return *this;
 }
 
@@ -24,7 +24,7 @@ const std::string &PresidentialPardonForm::getTarget() const
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
-	Form::execute(executor); //부모클래스form안에 있는 execute함수를 쓰려고
+	Form::execute(executor);
 	std::cout << "[ PresidentialPardonForm::execute SUCCESS ] [ " << this->getTarget() << " ] has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 

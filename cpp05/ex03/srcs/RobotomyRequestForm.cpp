@@ -27,12 +27,15 @@ const std::string& RobotomyRequestForm::getTarget() const
 void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
 	Form::execute(executor);
-	std::cout << "@#$$#@#$!@#%~~~drilling noises~~~!#@$$#@$!!!#@$#$" << std::endl;
-	std::srand(time(0)); //time을 seed로 가지고 있는 srand함수를 부르고
-	if (std::rand() % 2) //rand()함수를 이용해서 완벽히 랜덤한 값을 가져옴
+	std::cout << "Drrrr....Drrrrrrrrrr.....(Drilling noises)" << std::endl;
+	std::srand(time(0));
+	if (std::rand() % 2)
 		std::cout << "[ RobotomyRequestForm::execute SUCCESS ] [ " << this->getTarget() << " ] has been robotomized." << std::endl;
 	else
+	{
+		std::cout << "**" << executor.getName() << "** " << "executed [ " << this->getFormName() << " ]\nBUT ";
 		throw RobotomizeFailException();
+	}
 }
 
 std::ostream &operator<<(std::ostream &out, const RobotomyRequestForm &form)

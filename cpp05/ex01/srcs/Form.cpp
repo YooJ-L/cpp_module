@@ -24,17 +24,20 @@ Form::Form(const Form &other)
 : _name(other.getFormName()), _signGrade(other.getSignGrade()), _executeGrade(other.getExecuteGrade())
 {
 	_isSigned = other._isSigned;
-	*this = other; //써주는 사람도 있고 안써주는 사람도 있던데 무슨 차이?
+	*this = other;
 }
 
-Form::~Form()
-{
-}
+Form::~Form() {}
 
 Form& Form::operator =(const Form& other)
 {
 	_isSigned = other._isSigned;
 	return *this;
+}
+
+const std::string& Form::getFormName() const
+{
+	return _name;
 }
 
 int		Form::getSignGrade() const
@@ -54,17 +57,16 @@ bool	Form::getIsSigned() const
 
 void	Form::beSigned(const Bureaucrat &bureaucrat)
 {
-	if (_isSigned == false)
+	if (_signGrade < bureaucrat.getGrade() || _isSigned == true)
 	{
-		if (bureaucrat.getGrade() > this->_signGrade)
-		{
-			std::cout << "**" << bureaucrat.getName() << "**" << " couldn't sign " << "**" << this->_name << "**" << " because ";
+		std::cout << "**" << bureaucrat.getName() << "** ";
+		std::cout << "couldn't sign " << "[ " << getFormName() << " ] because ";
+		if (_isSigned == true)
+			throw AlreadySignedFormException();
+		else
 			throw GradeTooLowException();
-		}
-		_isSigned = true;
 	}
-	else
-		std::cout << "**" << this->_name << "**" << " is signed already." << std::endl;
+	_isSigned = true;
 }
 
 std::ostream& operator <<(std::ostream &out, const Form &form)
@@ -79,15 +81,15 @@ std::ostream& operator <<(std::ostream &out, const Form &form)
 //exception
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade Is Too High");
+	return ("GRADE IS TOO HIGH");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade Is Too Low");
+	return ("GRADE IS TOO LOW");
 }
 
-const std::string& Form::getFormName() const
+const char *Form::AlreadySignedFormException::what() const throw()
 {
-	return _name;
+	return ("The Form is already signed!");
 }

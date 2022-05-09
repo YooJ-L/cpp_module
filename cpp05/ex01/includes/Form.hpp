@@ -27,6 +27,12 @@ class	Form
 				const char *what() const throw();
 		};
 
+		class AlreadySignedFormException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
 	public:
 		Form();
 		Form(const std::string &formName, const int signGrade, const int executeGrade);
