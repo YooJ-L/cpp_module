@@ -3,8 +3,7 @@
 
 # include <iostream>
 # include <sstream>
-# include <string> //replace
-# include <cfloat>
+# include <string>
 # include <iomanip> //std::setprecision
 
 class Conversion
@@ -14,7 +13,8 @@ class Conversion
 			CHAR_,
 			INT_,
 			FLOAT_,
-			DOUBLE_
+			DOUBLE_,
+			INIT_
 		};
 
 		Conversion();
@@ -34,16 +34,17 @@ class Conversion
 
 		void	convert() const;
 
-		void	convertChar();
-		void	convertInt();
-		void	convertFloat();
-		void	convertDouble();
+		void	convertChar() const;
+		void	convertInt() const;
+		void	convertFloat() const;
+		void	convertDouble() const;
 		void	convertInfNan() const;
 
 		const std::string& getInput() const;
+		const Type& getType() const;
 
 	private:
-		const std::string	_input;
+		std::string	_input;
 		void	(Conversion::*_pF[5])() const;
 
 		Type	_type;
@@ -57,13 +58,12 @@ class Conversion
 		float	_f;
 		double	_d;
 
+		int		_inputSize;
+
 		class InvalidInputException : public std::exception {
 			public:
 				const char *what() const throw();
 		};
-
-
 };
-
 
 #endif

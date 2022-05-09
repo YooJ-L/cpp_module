@@ -3,7 +3,7 @@
 Conversion::Conversion()
 : _input("")
 {
-	_type = -1;
+	_type = INIT_;
 	_fFlag = 0;
 	_dotFlag = 0;
 	_InfNanFlag = 0;
@@ -11,6 +11,7 @@ Conversion::Conversion()
 	_i = 0;
 	_f = 0;
 	_d = 0;
+	_inputSize = _input.length();
 	_pF[0] = &Conversion::convertChar;
 	_pF[1] = &Conversion::convertInt;
 	_pF[2] = &Conversion::convertFloat;
@@ -24,10 +25,11 @@ Conversion::Conversion(const std::string &input)
 	_pF[1] = &Conversion::convertInt;
 	_pF[2] = &Conversion::convertFloat;
 	_pF[3] = &Conversion::convertDouble;
-	_type = -1;
+	_type = INIT_;
 	_fFlag = 0;
 	_dotFlag = 0;
 	_InfNanFlag = 0;
+	_inputSize = _input.length();
 	_c = 0;
 	_i = 0;
 	_f = 0;
@@ -35,7 +37,7 @@ Conversion::Conversion(const std::string &input)
 }
 
 Conversion::Conversion(const Conversion &other)
-: _input(other->getInput())
+: _input(other.getInput())
 {
 	*this = other;
 }
@@ -54,6 +56,7 @@ Conversion& Conversion::operator =(const Conversion &other)
 	_i = other._i;
 	_f = other._f;
 	_d = other._d;
+	_inputSize = other._inputSize;
 	_fFlag = other._fFlag;
 	_dotFlag = other._dotFlag;
 	_InfNanFlag = other._InfNanFlag;
@@ -66,7 +69,7 @@ void	Conversion::detectType()
 		return ;
 	else if (checkFlags())
 	{
-		if (detectFloat() || detectDouble() || detectInt()))
+		if (detectFloat() || detectDouble() || detectInt())
 			return ;
 	}
 	else
@@ -75,13 +78,14 @@ void	Conversion::detectType()
 
 bool	Conversion::detectChar()
 {
-	if ((_input.length() == 1 && !std::isdigit(_input[0]) && _input[0] >= 32 && _input[0] <= 126))
+	if ((_inputSize == 1 && !std::isdigit(_input[0]) && _input[0] >= 32 && _input[0] <= 126))
 	{
 		_c = _input[0];
 		_type = CHAR_;
 		return true;
 	}
-	else if (_input.length() == 3 && _input[0] == '\'' && _input[2] == '\'' && !std::isdigit(_input[1] && _input[1] >= 32 && _input[1] <= 126)
+	else if (_inputSize == 3 && _input[0] == '\'' && _input[2] == '\''
+				&& !std::isdigit(_input[1] && _input[1] >= 32 && _input[1] <= 126))
 	{
 		_c = _input[1];
 		_type = CHAR_;
@@ -93,10 +97,10 @@ bool	Conversion::detectChar()
 
 bool	Conversion::detectInfNan()
 {
-	if (_input == "nanf" || _input == "inff" || _input == "+inff" || _input == "-inff") //+nan -nan?
+	if (_input == "nanf" || _input == "inff" || _input == "+inff" || _input == "-inff")
 	{
 		_type = FLOAT_;
-		_input = _input.replace(_input.length() - 1, 1, "");
+		_input = _input.replace(_inputSize - 1, 1, "");
 	}
 	else if (_input == "nan" || _input == "inf" || _input == "+inf" || _input == "-inf")
 		_type = DOUBLE_;
@@ -108,7 +112,10 @@ bool	Conversion::detectInfNan()
 
 bool	Conversion::checkFlags()
 {
-	for (int i = 0; i < _input.length(); i++)
+	int	i = 0;
+	if (_input[0] == '+' || _input[0] == '-')
+		i++;
+	for (; i < _inputSize; i++)
 	{
 		if (_input[i] == '.')
 			_dotFlag += 1;
@@ -124,11 +131,11 @@ bool	Conversion::checkFlags()
 
 bool	Conversion::detectFloat()
 {
-	unsigned log	fIdx = _input.find('f');
-	if (_fFlag != 1 || _dotFlag != 1 || fIdx != _input.length() - 1)
+	int	fIdx = _input.find('f');
+	if (_fFlag != 1 || _dotFlag != 1 || fIdx != _inputSize - 1)
 		return false;
 	_type = FLOAT_;
-	std::stringstream iss(_input.replace(_input.length() - 1, 1, ""));
+	std::stringstream iss(_input.replace(_inputSize - 1, 1, ""));
 	float temp = 0.0f;
 	iss >> temp;
 	if (iss.fail())
@@ -139,7 +146,7 @@ bool	Conversion::detectFloat()
 
 bool	Conversion::detectDouble()
 {
-	if (_fFlag != 0 || _dotFlag != 0)
+	if (_fFlag != 0 || _dotFlag != 1)
 		return false;
 	_type = DOUBLE_;
 	std::stringstream iss(_input);
@@ -167,6 +174,7 @@ bool	Conversion::detectInt()
 
 void	Conversion::convert() const
 {
+	std::cout << std::fixed << std::setprecision(1);
 	if (_InfNanFlag == 1)
 	{
 		convertInfNan();
@@ -176,15 +184,15 @@ void	Conversion::convert() const
 		(this->*_pF[_type])();
 }
 
-void	Conversion::convertChar()
+void	Conversion::convertChar() const
 {
 	std::cout << "char: \'" << _c << "\'" << std::endl;
 	std::cout << "int: " << static_cast<int>(_c) << std::endl;
-	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(_c) << "f" << std::endl;
+	std::cout << "float: " << static_cast<float>(_c) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(_c) << std::endl;
 }
 
-void	Conversion::convertInt()
+void	Conversion::convertInt() const
 {
 	//char
 	std::cout << "char: ";
@@ -194,14 +202,15 @@ void	Conversion::convertInt()
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << "\'" << static_cast<char>(_i) << "\'" << std::endl;
-	//int
+	//other
 	std::cout << "int: " << _i << std::endl;
 	std::cout << "float: " << static_cast<float>(_i) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(_i) << std::endl;
 }
 
-void	Conversion::convertFloat()
+void	Conversion::convertFloat() const
 {
+	//char
 	std::cout << "char: ";
 	if (_f < -128 || _f > 127)
 		std::cout << "impossible" << std::endl;
@@ -209,6 +218,7 @@ void	Conversion::convertFloat()
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << static_cast<char>(_f) << "\'" << std::endl;
+	//other
 	std::cout << "int: ";
 	if (_f > INT_MAX || _f < INT_MIN)
 		std::cout << "impossible" << std::endl;
@@ -218,8 +228,9 @@ void	Conversion::convertFloat()
 	std::cout << "double: " << static_cast<double>(_f) << std::endl;
 }
 
-void	Conversion::convertDouble()
+void	Conversion::convertDouble() const
 {
+	//char
 	std::cout << "char: ";
 	if (_d < -128 || _d > 127)
 		std::cout << "impossible" << std::endl;
@@ -227,16 +238,14 @@ void	Conversion::convertDouble()
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << "\'" << static_cast<char>(_d) << "\'" << std::endl;
+	//other
 	std::cout << "int: ";
 	if (_d > INT_MAX || _d < INT_MIN)
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << static_cast<int>(_d) << std::endl;
 	std::cout << "float: ";
-	if (_d > FLT_MAX || _d < -FLT_MAX)
-		std::cout << "impossible" << std::endl;
-	else
-		std::cout << static_cast<float>(_d) << "f" << std::endl;
+	std::cout << static_cast<float>(_d) << "f" << std::endl;
 	std::cout << "double: " << _d << std::endl;
 }
 
@@ -253,7 +262,12 @@ const std::string& Conversion::getInput() const
 	return _input;
 }
 
+const Conversion::Type& Conversion::getType() const
+{
+	return _type;
+}
+
 const char *Conversion::InvalidInputException::what() const throw()
 {
-	return ("char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible");
+	return ("ERROR: invalid argument");
 }

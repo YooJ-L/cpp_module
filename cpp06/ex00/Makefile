@@ -1,9 +1,6 @@
-NAME		=	Intern
+NAME		=	Conversion
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Wall -std=c++98 $(INFLAGS)
-INFLAGS		=	-I#$(INCDIR)
-# INCDIR		=	./includes/
-# SRCDIR		=	./srcs/
+CXXFLAGS	=	-Wall -Wextra -Wall -std=c++98
 
 SRCS	=	main.cpp \
 			Conversion.cpp \
