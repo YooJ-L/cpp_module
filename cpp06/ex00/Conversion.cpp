@@ -186,7 +186,7 @@ void	Conversion::convert() const
 
 void	Conversion::convertChar() const
 {
-	std::cout << "char: \'" << _c << "\'" << std::endl;
+	std::cout << "char: '" << _c << "'" << std::endl;
 	std::cout << "int: " << static_cast<int>(_c) << std::endl;
 	std::cout << "float: " << static_cast<float>(_c) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(_c) << std::endl;
@@ -201,7 +201,7 @@ void	Conversion::convertInt() const
 	else if (_i < 32 || _i > 126)
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << "\'" << static_cast<char>(_i) << "\'" << std::endl;
+		std::cout << "'" << static_cast<char>(_i) << "'" << std::endl;
 	//other
 	std::cout << "int: " << _i << std::endl;
 	std::cout << "float: " << static_cast<float>(_i) << "f" << std::endl;
@@ -217,7 +217,7 @@ void	Conversion::convertFloat() const
 	else if (_f < 32 || _f > 126)
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << static_cast<char>(_f) << "\'" << std::endl;
+		std::cout << "'" << static_cast<char>(_f) << "'" << std::endl;
 	//other
 	std::cout << "int: ";
 	if (_f > INT_MAX || _f < INT_MIN)
@@ -234,10 +234,10 @@ void	Conversion::convertDouble() const
 	std::cout << "char: ";
 	if (_d < -128 || _d > 127)
 		std::cout << "impossible" << std::endl;
-	else if (_f < 32 || _f > 126)
+	else if (_d < 32 || _d > 126)
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << "\'" << static_cast<char>(_d) << "\'" << std::endl;
+		std::cout << "'" << static_cast<char>(_d) << "'" << std::endl;
 	//other
 	std::cout << "int: ";
 	if (_d > INT_MAX || _d < INT_MIN)

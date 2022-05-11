@@ -1,8 +1,5 @@
 #include "iter.hpp"
 
-//이 문제는 뭘 공부하라는거야?
-//sizeof() 함수는 메모리 공간을 차지하는 byte수를 리턴
-
 int		main(void)
 {
 	int	integerArr[5] = {0, 1, 2, 3, 4};

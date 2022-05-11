@@ -3,11 +3,6 @@
 
 # include <iostream>
 
-
-//longlong 으로 해준 이유는?
-//size_t 는?
-
-
 template<typename T>
 class Array
 {
@@ -51,7 +46,7 @@ Array<T>::Array(const Array& other)
 template<typename T>
 Array<T> &Array<T>::operator=(const Array& other)
 {
-	if (this == &other) //자기 대입?
+	if (this == &other)
 		return *this;
 	delete[] _arr;
 	_size = other._size;

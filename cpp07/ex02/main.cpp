@@ -12,11 +12,29 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
+
+    for (unsigned int i = 0; i < 19; i++) {
+		std::cout << numbers[i] << " ::: " << mirror[i] << std::endl;
+	}
+
     //SCOPE
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
+        std::cout << "===== Deep Copy =====" << std::endl;
+        for (unsigned int i = 0; i < 5; i++)
+        {
+            tmp[i] = 12345;
+        }
+        for (unsigned int i = 0; i < 5; i++)
+        {
+            std::cout << "tmp[" << i << "] = " << tmp[i] << std::endl;
+            std::cout << "numbers[" << i << "] = " << numbers[i] << std::endl;
+            std::cout << "test[" << i << "] = " << test[i] << std::endl;
+        }
     }
+
+    std::cout << std::endl;
 
     for (int i = 0; i < MAX_VAL; i++)
     {
@@ -47,6 +65,6 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }
