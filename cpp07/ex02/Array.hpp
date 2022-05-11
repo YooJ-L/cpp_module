@@ -17,7 +17,7 @@ class Array
 		~Array();
 
 		Array& operator=(const Array& other);
-		T& operator[](long long index) const;
+		T& operator[](long index) const;
 		
 		unsigned int size() const;
 };
@@ -57,7 +57,7 @@ Array<T> &Array<T>::operator=(const Array& other)
 }
 
 template<typename T>
-T& Array<T>::operator[](long long index) const
+T& Array<T>::operator[](long index) const
 {
 	if (index < 0 || index >= _size)
 		throw std::out_of_range("Out of Range");
